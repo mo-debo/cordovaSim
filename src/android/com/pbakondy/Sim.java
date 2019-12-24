@@ -55,8 +55,7 @@ public class Sim extends CordovaPlugin {
   private static final String GET_SIM_INFO = "getSimInfo";
   private static final String HAS_READ_PERMISSION = "hasReadPermission";
   private static final String REQUEST_READ_PERMISSION = "requestReadPermission";
-  private static final String READ_PRIVILEGED_PHONE_STATE = android.Manifest.permission.READ_PRIVILEGED_PHONE_STATE;
-
+ 
   private CallbackContext callback;
 
   @SuppressLint("HardwareIds")
@@ -232,9 +231,7 @@ public class Sim extends CordovaPlugin {
 //if (Build.VERSION.SDK_INT < 29) {
       this.callback.sendPluginResult(new PluginResult(PluginResult.Status.OK,
       simPermissionGranted(Manifest.permission.READ_PHONE_STATE)));
-//}else
-//{this.callback.sendPluginResult(new PluginResult(PluginResult.Status.OK,
-  //    simPermissionGranted(Manifest.permission.READ_PRIVILEGED_PHONE_STATE))); }
+      int permissionResult = context.checkCallingOrSelfPermission("android.permission.READ_PRIVILEGED_PHONE_STATE");
   }
 
   private void requestReadPermission() {
