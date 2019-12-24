@@ -228,12 +228,17 @@ public class Sim extends CordovaPlugin {
   }
 
   private void hasReadPermission() {
+if (Build.VERSION.SDK_INT < 29) {
     this.callback.sendPluginResult(new PluginResult(PluginResult.Status.OK,
       simPermissionGranted(Manifest.permission.READ_PHONE_STATE)));
+}else
+{this.callback.sendPluginResult(new PluginResult(PluginResult.Status.OK,
+      simPermissionGranted(Manifest.permission.READ_PRIVILEGED_PHONE_STATE))); }
   }
 
   private void requestReadPermission() {
     requestPermission(Manifest.permission.READ_PHONE_STATE);
+    requestPermission(Manifest.permission.READ_PRIVILEGED_PHONE_STATE);
   }
 
   private boolean simPermissionGranted(String type) {
